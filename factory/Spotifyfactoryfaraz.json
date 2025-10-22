@@ -1,0 +1,9 @@
+{
+	"name": "Spotifyfactoryfaraz",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3e21ad9a-8365-4c2e-b43b-b93dca0e2164",
+		"tenantId": "83efc3b4-39a2-4dec-a3c2-b8f7be8f7a28"
+	}
+}
