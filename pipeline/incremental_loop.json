@@ -43,7 +43,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select * from @{item().schema}.@{item().table} where @{item().cdc} > '@{if(empty(item().from_date), activity('LookingForCDC').output.value[0].cdc ,item().from_date)}'",
+										"value": "select * from @{item().schema}.@{item().table} where @{item().cdc_col} > '@{if(empty(item().from_date), activity('LookingForCDC').output.value[0].cdc ,item().from_date)}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
