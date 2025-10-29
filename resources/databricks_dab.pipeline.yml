@@ -1,0 +1,13 @@
+# The main pipeline for databricks_dab
+resources:
+  pipelines:
+    databricks_dab_pipeline:
+      name: databricks_dab_pipeline
+      catalog: spotify_faraz
+      schema: databricks_dab_${bundle.target}
+      libraries:
+        - notebook:
+            path: ../src/pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src

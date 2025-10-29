@@ -1,0 +1,32 @@
+# The main job for databricks_dab.
+resources:
+  jobs:
+    databricks_dab_job:
+      name: databricks_dab_job
+
+      trigger:
+        periodic:
+          interval: 1
+          unit: DAYS
+
+      tasks:
+        - task_key: notebook_task
+          existing_cluster_id: 1027-181637-zsqd8hw8
+          notebook_task:
+            notebook_path: ../src/notebook.ipynb
+
+        - task_key: refresh_pipeline
+          depends_on:
+            - task_key: notebook_task
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.databricks_dab_pipeline.id}
+
+        - task_key: main_task
+          depends_on:
+            - task_key: refresh_pipeline
+          existing_cluster_id: 1027-181637-zsqd8hw8
+          python_wheel_task:
+            package_name: databricks_dab
+            entry_point: main
+          libraries:
+            - whl: ../dist/*.whl
